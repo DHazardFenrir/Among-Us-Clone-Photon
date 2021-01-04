@@ -11,6 +11,11 @@ namespace AmongXP.Networking
         public event Action onConnectServerStarted;
         public event Action onConnectServerSucced;
         public event Action onConnectedServerFailed;
+
+
+        public event Action onJoinRoomStarted;
+        public event Action onJoinRoomSucced;
+        public event Action onJoinRoomFailed;
        
 
         public override void OnConnected()
@@ -40,11 +45,13 @@ namespace AmongXP.Networking
 
         public  void JoinRandomRoom()
         {
+            onJoinRoomStarted?.Invoke();
             Debug.Log("Entrando a random room...");
             PhotonNetwork.JoinRandomRoom();
         }
         public override void OnJoinRandomFailed(short returnCode, string message)
         {
+            onJoinRoomFailed?.Invoke();
             Debug.Log(message);
             CreateAndJoinRoom();
         }
@@ -62,6 +69,7 @@ namespace AmongXP.Networking
 
         public override void OnJoinedRoom()
         {
+            onJoinRoomSucced?.Invoke();
             Debug.Log(PhotonNetwork.NickName + "joined to" + PhotonNetwork.CurrentRoom.Name);
         }
 
