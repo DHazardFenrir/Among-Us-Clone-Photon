@@ -17,6 +17,9 @@ namespace AmongXP.Networking
         public event Action onJoinRoomSucced;
         public event Action onJoinRoomFailed;
        
+       private void Awake(){
+           PhotonNetwork.AutomaticallySyncScene = true;
+       }
 
         public override void OnConnected()
         {
@@ -70,7 +73,8 @@ namespace AmongXP.Networking
         public override void OnJoinedRoom()
         {
             onJoinRoomSucced?.Invoke();
-            Debug.Log(PhotonNetwork.NickName + "joined to" + PhotonNetwork.CurrentRoom.Name);
+            PhotonNetwork.LoadLevel(1);
+            //Debug.Log(PhotonNetwork.NickName + "joined to" + PhotonNetwork.CurrentRoom.Name);
         }
 
         public override void OnPlayerEnteredRoom(Player newPlayer)
