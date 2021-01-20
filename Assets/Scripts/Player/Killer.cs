@@ -8,12 +8,7 @@ public class Killer : MonoBehaviourPunCallbacks
    
 
     
-    void Update(){
-        if(Input.GetKeyDown(KeyCode.X))
-        {
-            TryToKill();
-        }
-    }
+    
    public void TryToKill()
    {
        var killables = FindObjectsOfType<Killeable>();

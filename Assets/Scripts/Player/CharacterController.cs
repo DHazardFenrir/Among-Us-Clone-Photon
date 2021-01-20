@@ -5,22 +5,22 @@ using UnityEngine;
 public class CharacterController : MonoBehaviour
 {
     [SerializeField] float speed = 5f;
-     private Vector3 input;
+    [SerializeField] CharacterController characterController;
+    PlayerInputHandler playerInput;
+    public float Speed => speed;
+    
      private Rigidbody2D rb;
 
      private void Awake(){
          rb = GetComponent<Rigidbody2D>();
+         playerInput = GetComponent<PlayerInputHandler>();
      }
 
-     private void Update(){
-         float h = Input.GetAxisRaw("Horizontal");
-         float v = Input.GetAxisRaw("Vertical");
-
-         input = new Vector3(h,v, 0f);
-     }
-
+  
      private void FixedUpdate(){
-         rb.velocity = input * speed;
+         rb.velocity = playerInput.input * speed;
      }
+
+    
 
 }
