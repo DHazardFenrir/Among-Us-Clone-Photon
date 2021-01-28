@@ -40,6 +40,7 @@ public class PlayerInputHandler : MonoBehaviourPunCallbacks
             float v = Input.GetAxisRaw("Vertical");
 
         MoveInput = new Vector2(h,v).normalized;
+      
    }
 
    private void FixedUpdate()
