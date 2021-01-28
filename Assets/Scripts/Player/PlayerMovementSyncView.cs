@@ -12,14 +12,21 @@ public class PlayerMovementSyncView : MonoBehaviourPun, IPunObservable
     private SpriteRenderer spriteRenderer;
 
     private PlayerInputHandler playerInput;
+    private PlayerAnimation animationController;
+
+    
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
        
         playerController = GetComponent<CharacterController>();
+
         spriteRenderer = GetComponent<SpriteRenderer>();
-        //playerInput = GetComponent<
+
+        playerInput= GetComponent<PlayerInputHandler>();
+        animationController = GetComponent<PlayerAnimation>();
+        
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -27,7 +34,7 @@ public class PlayerMovementSyncView : MonoBehaviourPun, IPunObservable
         if(stream.IsWriting)
         {
             //Envia datos
-            stream.SendNext(playerInput.input);
+            stream.SendNext(playerInput.MoveInput);
             stream.SendNext(rb.position);
         }
         else
@@ -51,11 +58,13 @@ public class PlayerMovementSyncView : MonoBehaviourPun, IPunObservable
 
                 rb.position = Vector2.MoveTowards(rb.position, lastNetowrkPosition, Time.fixedDeltaTime * 2);
                 rb.velocity = lastNetowrkInput * playerController.Speed;
+                playerController.Move(lastNetowrkInput);
             }
             else
             {
                 rb.position = lastNetowrkPosition;
             }
+            animationController.MoveAnimation(lastNetowrkInput);
         }
     }
 }

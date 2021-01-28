@@ -6,10 +6,14 @@ using Photon.Pun;
 public class PlayerInputHandler : MonoBehaviourPunCallbacks
 {
     Killer playerKiller;
-    public Vector2 input {get; set;}
+    CharacterController characterController;
+    public Vector2 MoveInput {get; set;}
+    private PlayerAnimation animationController;
     void Awake()
     {
        playerKiller = GetComponent<Killer>();
+       characterController = GetComponent<CharacterController>();
+       animationController = GetComponent<PlayerAnimation>();
     }
     void Start()
     {
@@ -19,21 +23,28 @@ public class PlayerInputHandler : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-        InputKill();
+        KillInput();
+        MovementInput();
     }
    
-   void InputKill(){
+   void KillInput(){
        if(Input.GetKeyDown(KeyCode.X))
        {
            playerKiller.TryToKill();
        }
    }
 
-   public void InputMove()
+   public void MovementInput()
    {
             float h = Input.GetAxisRaw("Horizontal");
             float v = Input.GetAxisRaw("Vertical");
 
-        input = new Vector2(h,v).normalized;
+        MoveInput = new Vector2(h,v).normalized;
+   }
+
+   private void FixedUpdate()
+   {
+      characterController.Move(MoveInput);
+      animationController.MoveAnimation(MoveInput);
    }
 }
