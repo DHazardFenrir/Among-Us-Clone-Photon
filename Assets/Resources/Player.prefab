@@ -114,7 +114,6 @@ GameObject:
   - component: {fileID: 7555968578804129381}
   - component: {fileID: 4220854814987532802}
   - component: {fileID: 494742021010361892}
-  - component: {fileID: 8706440393882414032}
   - component: {fileID: 7329607443964672140}
   - component: {fileID: 1045912196485046396}
   - component: {fileID: 2207784995473466369}
@@ -269,11 +268,11 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  observableSearch: 0
+  observableSearch: 2
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 8706440393882414032}
+  - {fileID: 1877863777164889086}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -299,21 +298,6 @@ MonoBehaviour:
   - {r: 0.32551622, g: 0.3301887, b: 0.326086, a: 0}
   - {r: 0.8882424, g: 0.9433962, b: 0.11124954, a: 0}
   nickLabel: {fileID: 1072384285184288860}
---- !u!114 &8706440393882414032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7555968578804129385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
 --- !u!114 &7329607443964672140
 MonoBehaviour:
   m_ObjectHideFlags: 0

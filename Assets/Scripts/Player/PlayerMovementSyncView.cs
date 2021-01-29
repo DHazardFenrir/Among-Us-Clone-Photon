@@ -3,8 +3,8 @@ using Photon.Pun;
 
 public class PlayerMovementSyncView : MonoBehaviourPun, IPunObservable
 {
-    private Vector3 lastNetowrkPosition;
-    private Vector3 lastNetowrkInput;
+    private Vector2 lastNetowrkPosition;
+    private Vector2 lastNetowrkInput;
 
     private Rigidbody2D rb;
 
@@ -40,14 +40,14 @@ public class PlayerMovementSyncView : MonoBehaviourPun, IPunObservable
         else
         {
             //Lee datos
-            lastNetowrkInput = (Vector3)stream.ReceiveNext();
+            lastNetowrkInput = (Vector2)stream.ReceiveNext();
             lastNetowrkPosition = (Vector2)stream.ReceiveNext();
         }
     }
 
     private void FixedUpdate()
     {
-        if(photonView.IsMine)
+        if(!photonView.IsMine)
         {
             if(lastNetowrkInput.x != 0 || lastNetowrkInput.y != 0)
             {
