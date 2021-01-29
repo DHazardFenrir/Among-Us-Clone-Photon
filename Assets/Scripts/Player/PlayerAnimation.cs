@@ -21,7 +21,7 @@ public class PlayerAnimation : MonoBehaviour
 
       //Flip
       bool isWalkingLeft = input.x < 0;
-      bool isWalkingRight = input.y > 0;
+      bool isWalkingRight = input.x > 0;
 
       if(isWalkingLeft)
       {
