@@ -3,39 +3,36 @@ using UnityEngine;
 using Photon.Pun;
 
 public class Killeable : MonoBehaviourPunCallbacks
-{  [SerializeField]GameObject deathbodyPrefab;
-   [SerializeField]Sprite m_deadSprite;
-   [SerializeField] SpriteRenderer mySprite;
-    bool isKilled = false;
+{  
 
-    void Awake()
-    {
-         mySprite = GetComponent<SpriteRenderer>();
-    }
-    
-     [PunRPC]
+    [SerializeField] GameObject deathbodyPrefab;
+
+
+
+
+
+
+    [PunRPC]
     public void Kill()
     {
-        //Destroy(this.gameObject);
-        isKilled = true;
         Instantiate(deathbodyPrefab, transform.position, transform.rotation);
-         mySprite.sprite = m_deadSprite;
 
-           
-        
+        if (photonView.IsMine)
+        {
+
+            FindObjectOfType<GameNetworkManager>().SpawnGhost(transform.position);
+        }
+        Destroy(this.gameObject);
+       
+
+
+
+
     }
 
-    void AutoKill()
-    {
-         if(Input.GetKeyDown(KeyCode.Z))
-         {
-              Debug.Log("aaaaaaaaaa");
-              mySprite.sprite = m_deadSprite;
-         }
-    }
 
-    void Update(){
-         AutoKill();
-    }
+   
+   
+  
 }
 

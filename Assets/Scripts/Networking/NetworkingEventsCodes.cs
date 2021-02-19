@@ -5,6 +5,7 @@ using UnityEngine;
 public static class NetworkingEventsCodes 
 {
     public const byte StartGameEventCode = 1;
+    public const byte ReportBody = 2;
 
 
 }

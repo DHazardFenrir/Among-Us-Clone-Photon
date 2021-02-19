@@ -9,6 +9,10 @@ public class PlayerInputHandler : MonoBehaviourPunCallbacks
     CharacterController characterController;
     public Vector2 MoveInput {get; set;}
     private PlayerAnimation animationController;
+    
+    
+    [SerializeField] bool isGhost = false;
+    public bool IsGhost => isGhost;
     void Awake()
     {
        playerKiller = GetComponent<Killer>();

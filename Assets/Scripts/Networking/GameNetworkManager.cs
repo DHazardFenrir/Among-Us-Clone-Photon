@@ -9,15 +9,27 @@ public class GameNetworkManager : MonoBehaviour
 {
     [SerializeField] GameObject playerPrefab = default;
     [SerializeField] Transform spawnPoint = default;
+    [SerializeField] GameObject ghostPrefab;
+    public GameObject MyPlayer { get; private set; }
    
     private void Start()
     {
         if (PhotonNetwork.IsConnected)
-            PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint.position, spawnPoint.rotation);
+        {
+           MyPlayer = PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint.position, spawnPoint.rotation);
+            
 
-        if(PhotonNetwork.IsMasterClient)
+        }
+
+
+        if (PhotonNetwork.IsMasterClient)
         StartCoroutine(StartGameDelay());
        
+    }
+
+    public void SpawnGhost(Vector3 position)
+    {
+       MyPlayer= PhotonNetwork.Instantiate(ghostPrefab.name, position, transform.rotation);
     }
 
     private IEnumerator StartGameDelay()

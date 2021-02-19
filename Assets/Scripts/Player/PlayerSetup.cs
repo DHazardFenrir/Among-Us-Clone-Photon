@@ -20,8 +20,11 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
     {
         if(!photonView.IsMine){
             GetComponent<CharacterController>().enabled = false;
-            GetComponent<Killer>().enabled = false;
+            
             GetComponent<PlayerInputHandler>().enabled = false;
+
+            Killer killer = GetComponent<Killer>();
+            if (killer != null) killer.enabled = false;
         }else //its mine!
         {
            var index = Random.Range(0, colors.Length);
