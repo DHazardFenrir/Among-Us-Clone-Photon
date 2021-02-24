@@ -6,6 +6,7 @@ public class Killeable : MonoBehaviourPunCallbacks
 {  
 
     [SerializeField] GameObject deathbodyPrefab;
+    [SerializeField] bool isDead = false;
 
 
 
@@ -23,6 +24,8 @@ public class Killeable : MonoBehaviourPunCallbacks
             FindObjectOfType<GameNetworkManager>().SpawnGhost(transform.position);
         }
         Destroy(this.gameObject);
+        isDead = true;
+
        
 
 

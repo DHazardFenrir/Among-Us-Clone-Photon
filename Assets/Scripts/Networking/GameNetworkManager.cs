@@ -4,12 +4,13 @@ using UnityEngine;
 using Photon.Pun;
 using ExitGames.Client.Photon;
 using Photon.Realtime;
-
+using UnityEngine.UI;
 public class GameNetworkManager : MonoBehaviour
 {
     [SerializeField] GameObject playerPrefab = default;
     [SerializeField] Transform spawnPoint = default;
     [SerializeField] GameObject ghostPrefab;
+    [SerializeField] Button ReportButton;
     public GameObject MyPlayer { get; private set; }
    
     private void Start()

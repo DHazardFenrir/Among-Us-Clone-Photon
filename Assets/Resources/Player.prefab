@@ -312,9 +312,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathbodyPrefab: {fileID: 778930728383909730, guid: 815575ba9f65a8b4f9f5bb5b58872b17,
     type: 3}
-  ghostPrefab: {fileID: 7555968578804129385, guid: 1f6d8a625c09ed047b0f0f4b6b87c517,
-    type: 3}
-  imDead: 0
+  isDead: 0
 --- !u!114 &1045912196485046396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,6 +381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ba2cbdefaadaff4081ef1678e68db0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isGhost: 0
 --- !u!1 &7854118571705463583
 GameObject:
   m_ObjectHideFlags: 0
