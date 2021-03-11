@@ -2,18 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class KillButton : MonoBehaviour
+
+public class ReportButton : MonoBehaviour
 {
     [SerializeField] GameNetworkManager gameNetworkManager = default;
     private Button button;
-    private Killer killer;
-    private KillTrigger killTrigger;
+    private Reporter reporter;
+    private ReportTrigger reportTrigger;
 
     private void Awake()
     {
         button = GetComponent<Button>();
         button.onClick.AddListener(Execute);
-        
+
     }
 
     private void OnEnable()
@@ -24,8 +25,8 @@ public class KillButton : MonoBehaviour
     {
         gameNetworkManager.onPlayerSpawned -= SetPlayer;
 
-        if (killTrigger != null)
-            killTrigger.onCanDoKill -= ShowButton;
+        if (reportTrigger != null)
+            reportTrigger.onCanReport -= ShowButton;
 
 
     }
@@ -36,15 +37,14 @@ public class KillButton : MonoBehaviour
 
     public void SetPlayer(GameObject game)
     {
-        killer = game.GetComponent<Killer>();
-        killTrigger = killer.GetComponentInChildren<KillTrigger>();
+        reporter = game.GetComponent<Reporter>();
+        reportTrigger = reporter.GetComponentInChildren<ReportTrigger>();
 
-        killTrigger.onCanDoKill += ShowButton;
+        reportTrigger.onCanReport += ShowButton;
     }
 
     private void Execute()
     {
-        killer.TryToKill();
+        reporter.TryToReport();
     }
-   
 }
