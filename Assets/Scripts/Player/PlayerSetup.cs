@@ -5,12 +5,15 @@ using TMPro;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 using System.Collections.Generic;
 using Photon.Realtime;
-
+using UnityEngine.Events;
 public class PlayerSetup : MonoBehaviourPunCallbacks
 {
-     [SerializeField] Color[] colors = default;
+     [SerializeField] PlayerCustomizations customizations;
      [SerializeField] TMP_Text nickLabel = default;
-    SpriteRenderer spriteRenderer;
+
+     SpriteRenderer spriteRenderer;
+
+    [SerializeField] UnityEvent onPlayerIsNotMine = default;
   
 
     void Awake()
@@ -25,9 +28,12 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
             GetComponent<CharacterController>().enabled = false;
             
             GetComponent<PlayerInputHandler>().enabled = false;
+            
 
             Killer killer = GetComponent<Killer>();
             if (killer != null) killer.enabled = false;
+
+            onPlayerIsNotMine.Invoke();
         }else //its mine!
         {
             Hashtable savedHash = PhotonNetwork.LocalPlayer.CustomProperties;
@@ -52,14 +58,14 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
     [PunRPC]
    public void SetColorIndex(int index)
    {
-       spriteRenderer.material.SetColor("_MainColor", colors[index]);
+       spriteRenderer.material.SetColor("_MainColor", customizations.GetColor(index));
      
    }
 
    public int GetUniqueRandomColorIndex()
     {
         List<int> availableColorIndexes = new List<int>();
-        for (int i = 0; i < colors.Length; i++)
+        for (int i = 0; i < customizations.ColorCount; i++)
             availableColorIndexes.Add(i);
 
         Player[] players = PhotonNetwork.PlayerList;

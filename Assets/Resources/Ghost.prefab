@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 8841662054271513463}
   m_Layer: 8
   m_Name: Ghost
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -286,15 +286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b384e6ed6c7a4034fbbda04c419522fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colors:
-  - {r: 0.990566, g: 0.97654855, b: 0.97654855, a: 0}
-  - {r: 0.9528302, g: 0.25618547, b: 0.7762673, a: 0}
-  - {r: 0.6844404, g: 0.17697577, b: 0.9150943, a: 0}
-  - {r: 0.07613501, g: 0.07413671, b: 0.9245283, a: 0}
-  - {r: 0.8980392, g: 0.17936935, b: 0.16470589, a: 0}
-  - {r: 0.06074225, g: 0.8584906, b: 0.79158694, a: 0}
-  - {r: 0.32551622, g: 0.3301887, b: 0.326086, a: 0}
-  - {r: 0.8882424, g: 0.9433962, b: 0.11124954, a: 0}
+  customizations: {fileID: 11400000, guid: 45e50b7778f54584b831753ad586f1db, type: 2}
   nickLabel: {fileID: 1072384285184288860}
 --- !u!95 &2207784995473466369
 Animator:

@@ -13,11 +13,14 @@ public class PlayerInputHandler : MonoBehaviourPunCallbacks
     
     [SerializeField] bool isGhost = false;
     public bool IsGhost => isGhost;
+
+    private Reporter reporter;
     void Awake()
     {
        playerKiller = GetComponent<Killer>();
        characterController = GetComponent<CharacterController>();
        animationController = GetComponent<PlayerAnimation>();
+        reporter = GetComponent<Reporter>();
     }
     void Start()
     {
@@ -29,6 +32,7 @@ public class PlayerInputHandler : MonoBehaviourPunCallbacks
     {
         KillInput();
         MovementInput();
+        ProcessReporterInput();
     }
    
    void KillInput(){
@@ -52,4 +56,12 @@ public class PlayerInputHandler : MonoBehaviourPunCallbacks
       characterController.Move(MoveInput);
       animationController.MoveAnimation(MoveInput);
    }
+
+    private void ProcessReporterInput()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            reporter.TryToReport();
+        }
+    }
 }

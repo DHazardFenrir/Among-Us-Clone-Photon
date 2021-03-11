@@ -4,13 +4,15 @@ using UnityEngine;
 using Photon.Pun;
 using ExitGames.Client.Photon;
 using Photon.Realtime;
-using UnityEngine.UI;
+using System;
 public class GameNetworkManager : MonoBehaviour
 {
     [SerializeField] GameObject playerPrefab = default;
     [SerializeField] Transform spawnPoint = default;
     [SerializeField] GameObject ghostPrefab;
-    [SerializeField] Button ReportButton;
+    public event Action<GameObject> onPlayerSpawned;
+    
+    
     public GameObject MyPlayer { get; private set; }
    
     private void Start()
@@ -25,12 +27,15 @@ public class GameNetworkManager : MonoBehaviour
 
         if (PhotonNetwork.IsMasterClient)
         StartCoroutine(StartGameDelay());
+
+        onPlayerSpawned?.Invoke(MyPlayer);
        
     }
 
     public void SpawnGhost(Vector3 position)
     {
        MyPlayer= PhotonNetwork.Instantiate(ghostPrefab.name, position, transform.rotation);
+       
     }
 
     private IEnumerator StartGameDelay()

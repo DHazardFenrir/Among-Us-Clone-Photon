@@ -5,31 +5,24 @@ using Photon.Pun;
 
 public class Killer : MonoBehaviourPunCallbacks
 {
-
+    [SerializeField] KillTrigger killTrigger = default;
     
 
     
     
    public void TryToKill()
    {
-     
-       var killeables = FindObjectsOfType<Killeable>();
-        Transform[] other = new Transform[killeables.Length];
-
-        for (int i=0; i< other.Length;i++)
+        if (!killTrigger.CanKill) return;
+        GameObject playerToKill = killTrigger.GetNearerPlayer();
+        
+        if(playerToKill != null)
         {
-            other[i] = killeables[i].transform;
-            float minDistance = Vector3.Distance(other[i].position, transform.position);
-            if (minDistance < 1)
-            {
-
-                if (killeables[i].photonView.IsMine) continue;
-                killeables[i].photonView.RPC("Kill", RpcTarget.All);
-
-            }
-
+            Killeable killeable = playerToKill.GetComponent<Killeable>();
+            if (killeable.photonView.IsMine) return;
+            killeable.photonView.RPC("Kill", RpcTarget.All);
         }
-
+     
+       
         
        
        
