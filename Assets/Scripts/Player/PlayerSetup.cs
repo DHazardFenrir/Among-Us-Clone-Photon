@@ -6,9 +6,11 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 using System.Collections.Generic;
 using Photon.Realtime;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 public class PlayerSetup : MonoBehaviourPunCallbacks
 {
      [SerializeField] PlayerCustomizations customizations;
+    [SerializeField] PlayerRoles roles;
      [SerializeField] TMP_Text nickLabel = default;
 
      SpriteRenderer spriteRenderer;
@@ -36,6 +38,7 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
             onPlayerIsNotMine.Invoke();
         }else //its mine!
         {
+           
             Hashtable savedHash = PhotonNetwork.LocalPlayer.CustomProperties;
             int index;
             if (savedHash.ContainsKey("ColorIndex"))
@@ -53,6 +56,7 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
            photonView.RPC("SetColorIndex", RpcTarget.AllBuffered, index);
         }
         SetNickname();
+    
     }
 
     [PunRPC]
@@ -61,6 +65,8 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
        spriteRenderer.material.SetColor("_MainColor", customizations.GetColor(index));
      
    }
+
+    
 
    public int GetUniqueRandomColorIndex()
     {

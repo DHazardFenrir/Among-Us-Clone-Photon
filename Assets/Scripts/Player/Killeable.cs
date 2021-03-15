@@ -16,6 +16,7 @@ public class Killeable : MonoBehaviourPunCallbacks
     [PunRPC]
     public void Kill()
     {
+        
         Instantiate(deathbodyPrefab, transform.position, transform.rotation);
 
         if (photonView.IsMine)

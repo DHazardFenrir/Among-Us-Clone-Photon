@@ -386,6 +386,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   customizations: {fileID: 11400000, guid: 45e50b7778f54584b831753ad586f1db, type: 2}
+  roles: {fileID: 11400000, guid: 085fcd4e7a6288b408c4261b54ea0dd7, type: 2}
   nickLabel: {fileID: 1072384285184288860}
   onPlayerIsNotMine:
     m_PersistentCalls:
