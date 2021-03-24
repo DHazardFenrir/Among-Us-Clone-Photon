@@ -27,5 +27,5 @@ Material:
     m_Floats:
     - ShadowIntensity: 1
     m_Colors:
-    - CascoColor: {r: 0, g: 0, b: 0, a: 0}
-    - _MainColor: {r: 0, g: 0, b: 0, a: 0}
+    - CascoColor: {r: 0.3301887, g: 0.19157174, b: 0.19157174, a: 0}
+    - _MainColor: {r: 0.3962264, g: 0.25231397, b: 0.25231397, a: 0}
