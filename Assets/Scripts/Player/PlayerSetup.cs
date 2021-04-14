@@ -9,9 +9,12 @@ using UnityEngine.Events;
 using Random = UnityEngine.Random;
 public class PlayerSetup : MonoBehaviourPunCallbacks
 {
-     [SerializeField] PlayerCustomizations customizations;
-    [SerializeField] PlayerRoles roles;
+     [SerializeField] PlayerCustomizations customizations = default;
+     [SerializeField] PlayerRoles roles = default;
+     [SerializeField] Pets petRandom = default;
      [SerializeField] TMP_Text nickLabel = default;
+     [SerializeField] GameObject petContainer;
+     [SerializeField] Transform petSpawn;
 
      SpriteRenderer spriteRenderer;
 
@@ -54,6 +57,21 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
             }
            
            photonView.RPC("SetColorIndex", RpcTarget.AllBuffered, index);
+
+
+            //Set Pets
+            int petIndex;
+            if (savedHash.ContainsKey("PetIndex"))
+            {
+               petIndex = (int)savedHash["PetIndex"];
+            }
+            else
+            {
+                petIndex = GetUniqueRandomPetIndex();
+                savedHash.Add("PetIndex", petIndex);
+                PhotonNetwork.LocalPlayer.SetCustomProperties(savedHash);
+            }
+            photonView.RPC("SetPetIndex", RpcTarget.AllBuffered, petIndex);
         }
         SetNickname();
     
@@ -65,8 +83,12 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
        spriteRenderer.material.SetColor("_MainColor", customizations.GetColor(index));
      
    }
-
-    
+   [PunRPC]
+    public void SetPetIndex(int petIndex)
+    {
+        Transform petParent = this.petContainer.transform;
+        Instantiate(petRandom.GetPet(petIndex), petSpawn.position, petSpawn.rotation, petParent);
+    }
 
    public int GetUniqueRandomColorIndex()
     {
@@ -87,6 +109,26 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
         int randomIndex = Random.Range(0, availableColorIndexes.Count);
         return availableColorIndexes[randomIndex];
 
+    }
+
+    public int GetUniqueRandomPetIndex()
+    {
+        List<int> availablePetIndexes = new List<int>();
+        for (int i = 0; i < petRandom.PetsCount; i++)
+            availablePetIndexes.Add(i);
+
+        Player[] players = PhotonNetwork.PlayerList;
+        for (int i = 0; i < players.Length; i++)
+        {
+            Hashtable hashtable = players[i].CustomProperties;
+            if (!hashtable.ContainsKey("PetIndex"))
+                continue;
+            int index = (int)hashtable["PetIndex"];
+            availablePetIndexes.Remove(index);
+        }
+
+        int randomIndex = Random.Range(0, availablePetIndexes.Count);
+        return availablePetIndexes[randomIndex];
     }
 
    public void SetNickname()

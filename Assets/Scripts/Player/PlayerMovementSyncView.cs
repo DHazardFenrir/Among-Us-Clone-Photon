@@ -46,19 +46,20 @@ public class PlayerMovementSyncView : MonoBehaviourPun, IPunObservable
     }
 
     private void FixedUpdate()
-    {
+    { //Actualizacion del servidor en tu View, de objetos que no son tuyos. 
         if(!photonView.IsMine)
         {
             if(lastNetowrkInput.x != 0 || lastNetowrkInput.y != 0)
             {
                
-
+                //Hacer el calculo para actualizar a la posicion del servidor. 
                 rb.position = Vector2.MoveTowards(rb.position, lastNetowrkPosition, Time.fixedDeltaTime * 2);
                 
-                playerController.Move(lastNetowrkInput);
+                playerController.Move(lastNetowrkInput); 
             }
             else
             {
+                //Actualiza la posicion en la que esta, a la posicion del servidor.
                 rb.position = lastNetowrkPosition;
             }
             animationController.MoveAnimation(lastNetowrkInput);
