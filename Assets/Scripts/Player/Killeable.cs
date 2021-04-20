@@ -1,6 +1,7 @@
 ﻿
 using UnityEngine;
 using Photon.Pun;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class Killeable : MonoBehaviourPunCallbacks
 {  
@@ -17,7 +18,13 @@ public class Killeable : MonoBehaviourPunCallbacks
     public void Kill()
     {
         
-        Instantiate(deathbodyPrefab, transform.position, transform.rotation);
+        GameObject deathBodyObject = Instantiate(deathbodyPrefab, transform.position, transform.rotation);
+        DeadBody deadBody = deathBodyObject.GetComponent<DeadBody>();
+
+        Hashtable hashtable = this.photonView.Owner.CustomProperties;
+        int indexColor = (int)hashtable["ColorIndex"];
+        deadBody.SetColorIndex(indexColor);
+
 
         if (photonView.IsMine)
         {

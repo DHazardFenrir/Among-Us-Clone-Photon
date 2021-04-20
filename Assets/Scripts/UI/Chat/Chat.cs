@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Chat : MonoBehaviour
 {
@@ -8,6 +9,15 @@ public class Chat : MonoBehaviour
     [SerializeField] GameObject messagePrefab = default;
     [SerializeField] Transform messageParent = default;
 
+    public event Action onChatStarted;
+
+
+    public void StartChat()
+    {
+        CleanChat();
+        onChatStarted?.Invoke();
+
+    }
 
     public void CreateMessage(Color playerColor, string nickname, string messageText)
     {

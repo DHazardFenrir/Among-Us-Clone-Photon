@@ -6,6 +6,7 @@ using TMPro;
 public class InputFieldMessage : MonoBehaviour
 {
     [SerializeField] GameNetworkManager gameNetworkManager = default;
+    [SerializeField] Chat chat = default;
     private TMP_InputField inputTextMessage = default;
     private ChatUser chatUser;
 
@@ -17,9 +18,14 @@ public class InputFieldMessage : MonoBehaviour
     private void OnEnable()
     {
         gameNetworkManager.onPlayerSpawned += SetPlayer;
+        chat.onChatStarted += SetInputFieldStatus;
+       
     }
 
-
+    private void SetInputFieldStatus()
+    {
+        this.gameObject.SetActive(chatUser != null);
+    }
     //private void OnDisable()
     //{
     //    gameNetworkManager.onPlayerSpawned -= SetPlayer;

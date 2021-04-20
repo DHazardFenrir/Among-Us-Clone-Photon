@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 8981186954058758750}
   - component: {fileID: 3448869299682346249}
   - component: {fileID: 8122080328886086803}
-  - component: {fileID: 6395193530875339436}
   - component: {fileID: 6507816537840941432}
   m_Layer: 10
   m_Name: deathBody
@@ -144,19 +143,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.47878787, y: 0.4909091}
   m_EdgeRadius: 0
---- !u!114 &6395193530875339436
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 778930728383909730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a504c614e412e8840a4effb6ac5657ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  customizations: {fileID: 11400000, guid: 45e50b7778f54584b831753ad586f1db, type: 2}
 --- !u!114 &6507816537840941432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,3 +155,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b55470a582f2a8240891a40e701ab754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  customizations: {fileID: 11400000, guid: 45e50b7778f54584b831753ad586f1db, type: 2}

@@ -8,10 +8,15 @@ using Photon.Pun;
 public class ReportManager : MonoBehaviour, IOnEventCallback
 {
     [SerializeField] GameObject chatObject = default;
+    [SerializeField] Chat chat;
     private void OnEnable() => PhotonNetwork.AddCallbackTarget(this);
     private void OnDisable() => PhotonNetwork.RemoveCallbackTarget(this);
 
-   
+    private void Start()
+    {
+        chatObject.SetActive(false);
+    }
+
 
     public void OnEvent(EventData photonEvent)
     {
@@ -19,7 +24,7 @@ public class ReportManager : MonoBehaviour, IOnEventCallback
         if(eventCode == NetworkingEventsCodes.ReportBodyEventCode)
         {
             object data = photonEvent.CustomData;
-            chatObject.GetComponentInChildren<Chat>().CleanChat();
+            chat.StartChat();
             chatObject.SetActive(true);
         }
     }
