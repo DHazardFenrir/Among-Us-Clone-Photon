@@ -7,7 +7,9 @@ using System.Collections.Generic;
 using Photon.Realtime;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
-public class PlayerSetup : MonoBehaviourPunCallbacks
+using ExitGames.Client.Photon;
+
+public class PlayerSetup : MonoBehaviourPunCallbacks, IOnEventCallback
 {
      [SerializeField] PlayerCustomizations customizations = default;
      [SerializeField] PlayerRoles roles = default;
@@ -19,7 +21,12 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
      SpriteRenderer spriteRenderer;
 
     [SerializeField] UnityEvent onPlayerIsNotMine = default;
-  
+
+
+
+
+
+
 
     void Awake()
     {
@@ -75,6 +82,36 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
         }
         SetNickname();
     
+    }
+
+    private void SetRandomRol()
+    {
+        Hashtable savedHash = PhotonNetwork.LocalPlayer.CustomProperties;
+        bool isImpostor;
+        if (savedHash.ContainsKey("IsImpostor"))
+        {
+           isImpostor = (bool)savedHash["IsImpostor"];
+        }
+        else
+        {
+            int random = Random.Range(0, 2);
+            isImpostor = random == 0;
+
+            savedHash.Add("IsImpostor", isImpostor);
+            PhotonNetwork.LocalPlayer.SetCustomProperties(savedHash);
+        }
+
+        photonView.RPC("SetRol", RpcTarget.AllBuffered, isImpostor);
+
+
+    
+    }
+
+    [PunRPC]
+    public void SetRol(bool isImpostor)
+    {
+        string message = isImpostor ? "impostor" : "crewmate";
+        Debug.Log(photonView.Owner + "es" + message);
     }
 
     [PunRPC]
@@ -135,4 +172,15 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
    {
       nickLabel.text = photonView.Owner.NickName;
    }
+
+    public void OnEvent(EventData photonEvent)
+    {
+        byte eventCode = photonEvent.Code;
+
+        if(eventCode == NetworkingEventsCodes.StartGameEventCode)
+        {
+            object data = photonEvent.CustomData;
+            SetRandomRol();
+        }
+    }
 }

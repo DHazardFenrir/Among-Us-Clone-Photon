@@ -288,7 +288,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   customizations: {fileID: 11400000, guid: 45e50b7778f54584b831753ad586f1db, type: 2}
   roles: {fileID: 0}
+  petRandom: {fileID: 0}
   nickLabel: {fileID: 1072384285184288860}
+  petContainer: {fileID: 0}
+  petSpawn: {fileID: 0}
   onPlayerIsNotMine:
     m_PersistentCalls:
       m_Calls: []

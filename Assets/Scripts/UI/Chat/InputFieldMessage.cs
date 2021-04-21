@@ -26,12 +26,7 @@ public class InputFieldMessage : MonoBehaviour
     {
         this.gameObject.SetActive(chatUser != null);
     }
-    //private void OnDisable()
-    //{
-    //    gameNetworkManager.onPlayerSpawned -= SetPlayer;
-       
-            
-    //}
+   
 
     private void SetPlayer(GameObject playerObject)
     {

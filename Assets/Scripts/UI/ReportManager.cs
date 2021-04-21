@@ -9,6 +9,7 @@ public class ReportManager : MonoBehaviour, IOnEventCallback
 {
     [SerializeField] GameObject chatObject = default;
     [SerializeField] Chat chat;
+    [SerializeField] VoteScreen voteScreen = default;
     private void OnEnable() => PhotonNetwork.AddCallbackTarget(this);
     private void OnDisable() => PhotonNetwork.RemoveCallbackTarget(this);
 
@@ -24,6 +25,7 @@ public class ReportManager : MonoBehaviour, IOnEventCallback
         if(eventCode == NetworkingEventsCodes.ReportBodyEventCode)
         {
             object data = photonEvent.CustomData;
+            voteScreen.CreatePlayerRows();
             chat.StartChat();
             chatObject.SetActive(true);
         }
