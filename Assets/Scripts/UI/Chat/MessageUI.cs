@@ -10,10 +10,7 @@ public class MessageUI : MonoBehaviour
     [SerializeField] TMP_Text nicknameLabel = default;
     [SerializeField] TMP_Text messageLabel = default;
 
-    private void Start()
-    {
-        SetMessage(Random.ColorHSV(), "9999Master", "auxilio");
-    }
+  
 
     public void SetMessage(Color playerColor, string nickname, string message)
     {
